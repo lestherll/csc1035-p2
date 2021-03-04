@@ -1,4 +1,4 @@
-package csc1035.project2;
+package util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
