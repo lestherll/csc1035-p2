@@ -30,15 +30,20 @@ public class Booking {
     @JoinColumn(name = "student_id")
     private Student student;
 
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+
     public Booking() {}
 
-    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime, Room room) {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        this.room = room;
     }
 
-    public Booking(int bookingId, LocalDateTime startDateTime, LocalDateTime endDateTime, Student student) {
-        this(startDateTime, endDateTime);
+    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime, Room room, Student student) {
+        this(startDateTime, endDateTime, room);
         this.student = student;
     }
 

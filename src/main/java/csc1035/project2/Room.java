@@ -1,6 +1,7 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Room")
@@ -18,6 +19,9 @@ public class Room {
 
     @Column(name = "type")
     private String type;
+
+    @OneToMany(mappedBy = "room")
+    private List<Booking> booking;
 
     public Room() {
     }
