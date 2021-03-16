@@ -28,4 +28,36 @@ public class Room {
         this.sdMaxCapacity = sdMaxCapacity;
         this.type = type;
     }
+
+    public String getRoomId() {
+        return this.roomId;
+    }
+
+    public void setRoomId(String newRoomId) {
+        this.roomId = newRoomId;
+    }
+
+    public int getMaxCap() {
+        return this.maxCapacity;
+    }
+
+    public void setMaxCap(int newMaxCap) {
+        this.maxCapacity = newMaxCap;
+    }
+
+    public int getSdMaxCap() {
+        return this.sdMaxCapacity;
+    }
+
+    public void setSdMaxCap(int newSdMaxCap) {
+        this.sdMaxCapacity = newSdMaxCap;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String newType) {
+        this.type = newType;
+    }
 }
