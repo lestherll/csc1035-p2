@@ -10,6 +10,8 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "Student_getAllBookings", query = "FROM Booking b where b.student = :student"),
         @NamedQuery(name = "Student_getActiveBookings", query = "FROM Booking b where b.student = :student and b.endDateTime >= now()"),
+        @NamedQuery(name = "Student_getBookingsThisWeek", query = "FROM Booking b where b.student = :student and yearweek(b.endDateTime) = yearweek(now())"),
+
 })
 public class Student {
 
@@ -74,6 +76,11 @@ public class Student {
 
     public List<?> getActiveBookings(Session session) {
         Query query = session.createNamedQuery("Student_getActiveBookings", Booking.class);
+        return query.setParameter("student", this).getResultList();
+    }
+
+    public List<?> getBookingsThisWeek(Session session) {
+        Query query = session.createNamedQuery("Student_getBookingsThisWeek", Booking.class);
         return query.setParameter("student", this).getResultList();
     }
 
