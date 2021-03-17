@@ -1,10 +1,16 @@
 package csc1035.project2;
 
+import org.hibernate.Session;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "Student")
+@NamedQueries({
+        @NamedQuery(name = "Student_getAllBookings", query = "FROM Booking b where b.student = :student"),
+        @NamedQuery(name = "Student_getActiveBookings", query = "FROM Booking b where b.student = :student and b.endDateTime >= now()"),
+})
 public class Student {
 
     @Id
@@ -53,4 +59,30 @@ public class Student {
         this.lastName = newLastName;
     }
 
+    public List<Booking> getBooking() {
+        return booking;
+    }
+
+    public void setBooking(List<Booking> booking) {
+        this.booking = booking;
+    }
+
+    public List<?> getAllBookings(Session session) {
+        Query query = session.createNamedQuery("Student_getAllBookings", Booking.class);
+        return query.setParameter("student", this).getResultList();
+    }
+
+    public List<?> getActiveBookings(Session session) {
+        Query query = session.createNamedQuery("Student_getActiveBookings", Booking.class);
+        return query.setParameter("student", this).getResultList();
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }
