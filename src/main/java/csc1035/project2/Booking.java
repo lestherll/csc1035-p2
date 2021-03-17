@@ -1,7 +1,10 @@
 package csc1035.project2;
 
+import org.hibernate.Session;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Booking class will serve as the mapping class for the Booking Table.
@@ -13,13 +16,13 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Booking")
+@NamedQueries({
+        @NamedQuery(name = "Booking_getAll", query = "FROM Booking"),
+        @NamedQuery(name = "Booking_thisWeek", query = "FROM Booking b where yearweek(b.endDateTime) = yearweek(now())")
+})
 public class Booking {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private int bookingId;
-
     @Column(name = "start")
     private LocalDateTime startDateTime;
 
@@ -49,5 +52,24 @@ public class Booking {
 
     // Constructor when a staff books
 
-    // getters and setters
+    public static List<?> getAllBookings(Session session){
+        Query query = session.createNamedQuery("Booking_getAll", Booking.class);
+        return query.getResultList();
+    }
+
+    public static List<?> getBookingsThisWeek(Session session){
+        Query query = session.createNamedQuery("Booking_thisWeek", Booking.class);
+        return query.getResultList();
+    }
+
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "startDateTime=" + startDateTime +
+                ", endDateTime=" + endDateTime +
+                ", student=" + student +
+                ", room=" + room +
+                '}';
+    }
 }
