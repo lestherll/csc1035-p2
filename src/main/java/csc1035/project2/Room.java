@@ -9,6 +9,7 @@ import java.util.List;
 @Table(name = "Room")
 @NamedQueries({
         @NamedQuery(name = "Room_getAll", query = "FROM Room"),
+        @NamedQuery(name = "Room_getActiveBookings", query = "FROM Booking b WHERE b.room = :room")
 })
 public class Room {
 
@@ -76,6 +77,13 @@ public class Room {
     public static List<Room> getAll(Session session) {
         return session
                 .createNamedQuery("Room_getAll", Room.class)
+                .getResultList();
+    }
+
+    public List<Booking> getActiveBookings(Session session) {
+        return session
+                .createNamedQuery("Room_getActiveBookings", Booking.class)
+                .setParameter("room", this)
                 .getResultList();
     }
 }
