@@ -1,10 +1,15 @@
 package csc1035.project2;
 
+import org.hibernate.Session;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "Room")
+@NamedQueries({
+        @NamedQuery(name = "Room_getAll", query = "FROM Room"),
+})
 public class Room {
 
     @Id
@@ -32,6 +37,8 @@ public class Room {
         this.sdMaxCapacity = sdMaxCapacity;
         this.type = type;
     }
+
+    // Setters and Getters
 
     public String getRoomId() {
         return this.roomId;
@@ -63,5 +70,12 @@ public class Room {
 
     public void setType(String newType) {
         this.type = newType;
+    }
+
+    // Query Methods
+    public static List<Room> getAll(Session session) {
+        return session
+                .createNamedQuery("Room_getAll", Room.class)
+                .getResultList();
     }
 }
