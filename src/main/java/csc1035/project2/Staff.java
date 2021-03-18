@@ -19,4 +19,36 @@ public class Staff {
 
     @OneToMany(mappedBy = "staff")
     private List<Booking> booking;
+
+    public Staff() {}
+
+    public Staff(String staffId, String firstName, String lastName) {
+        this.staffId = staffId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public String getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(String staffId) {
+        this.staffId = staffId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }
