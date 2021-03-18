@@ -1,11 +1,17 @@
 package csc1035.project2;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.hibernate.Session;
+
+import javax.persistence.*;
 import java.util.List;
 
-public class Staff {
+
+@Entity
+@Table(name = "Staff")
+@NamedQueries({
+        @NamedQuery(name = "Staff_getAllBookings", query = "FROM Booking b WHERE b.staff = :staff")
+})
+public class Staff implements Member{
 
     @Id
     @Column(name = "staff_id")
@@ -50,5 +56,21 @@ public class Staff {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<Booking> getAllBookings(Session session) {
+        return session
+                .createNamedQuery("Staff_getAllBookings", Booking.class)
+                .setParameter("staff", this)
+                .getResultList();
+    }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "staffId='" + staffId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }
