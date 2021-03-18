@@ -9,7 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "Staff")
 @NamedQueries({
-        @NamedQuery(name = "Staff_getAllBookings", query = "FROM Booking b WHERE b.staff = :staff")
+        @NamedQuery(name = "Staff_getAllBookings", query = "FROM Booking b WHERE b.staff = :staff"),
+        @NamedQuery(name = "Staff_getActiveBookings", query = "FROM Booking b WHERE b.staff = :staff AND b.endDateTime >= now()"),
 })
 public class Staff implements Member{
 
@@ -61,6 +62,13 @@ public class Staff implements Member{
     public List<Booking> getAllBookings(Session session) {
         return session
                 .createNamedQuery("Staff_getAllBookings", Booking.class)
+                .setParameter("staff", this)
+                .getResultList();
+    }
+
+    public List<Booking> getActiveBookings(Session session) {
+        return session
+                .createNamedQuery("Staff_getActiveBookings", Booking.class)
                 .setParameter("staff", this)
                 .getResultList();
     }
