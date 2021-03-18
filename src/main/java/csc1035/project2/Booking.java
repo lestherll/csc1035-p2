@@ -58,7 +58,10 @@ public class Booking {
         this.student = student;
     }
 
-    // Constructor when a staff books
+    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime, Room room, Staff staff) {
+        this(startDateTime, endDateTime, room);
+        this.staff = staff;
+    }
 
     public static List<?> getAllBookings(Session session){
         Query query = session.createNamedQuery("Booking_getAll", Booking.class);
@@ -70,6 +73,53 @@ public class Booking {
         return query.getResultList();
     }
 
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 
     @Override
     public String toString() {
