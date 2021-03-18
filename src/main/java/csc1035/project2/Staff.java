@@ -11,6 +11,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "Staff_getAllBookings", query = "FROM Booking b WHERE b.staff = :staff"),
         @NamedQuery(name = "Staff_getActiveBookings", query = "FROM Booking b WHERE b.staff = :staff AND b.endDateTime >= now()"),
+        @NamedQuery(name = "Staff_getBookingsThisWeek", query = "FROM Booking b WHERE b.staff = :staff and yearweek(b.endDateTime) = yearweek(now())")
 })
 public class Staff implements Member{
 
@@ -69,6 +70,13 @@ public class Staff implements Member{
     public List<Booking> getActiveBookings(Session session) {
         return session
                 .createNamedQuery("Staff_getActiveBookings", Booking.class)
+                .setParameter("staff", this)
+                .getResultList();
+    }
+
+    public List<Booking> getBookingsThisWeek(Session session) {
+        return session
+                .createNamedQuery("Staff_getBookingsThisWeek", Booking.class)
                 .setParameter("staff", this)
                 .getResultList();
     }
