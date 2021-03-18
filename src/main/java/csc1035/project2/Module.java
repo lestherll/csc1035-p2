@@ -1,9 +1,7 @@
 package csc1035.project2;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Module")
@@ -21,6 +19,11 @@ public class Module {
 
     @Column(name = "weeks")
     private int weeks;
+
+    @OneToMany(mappedBy = "module")
+    private List<Booking> booking;
 }
+
+
 
 
