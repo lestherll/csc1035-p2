@@ -8,9 +8,18 @@ import java.util.List;
 @Entity
 @Table(name = "Student")
 @NamedQueries({
-        @NamedQuery(name = "Student_getAllBookings", query = "FROM Booking b where b.student = :student"),
-        @NamedQuery(name = "Student_getActiveBookings", query = "FROM Booking b where b.student = :student and b.endDateTime >= now()"),
-        @NamedQuery(name = "Student_getBookingsThisWeek", query = "FROM Booking b where b.student = :student and yearweek(b.endDateTime) = yearweek(now())"),
+        @NamedQuery(
+                name = "Student_getAllBookings",
+                query = "FROM Booking b where b.student = :student"
+        ),
+        @NamedQuery(
+                name = "Student_getActiveBookings",
+                query = "FROM Booking b where b.student = :student and b.endDateTime >= now()"
+        ),
+        @NamedQuery(
+                name = "Student_getBookingsThisWeek",
+                query = "FROM Booking b where b.student = :student and yearweek(b.endDateTime) = yearweek(now())"
+        ),
 
 })
 public class Student {

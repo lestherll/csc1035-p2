@@ -13,7 +13,7 @@ import java.util.List;
         @NamedQuery(name = "Staff_getActiveBookings", query = "FROM Booking b WHERE b.staff = :staff AND b.endDateTime >= now()"),
         @NamedQuery(name = "Staff_getBookingsThisWeek", query = "FROM Booking b WHERE b.staff = :staff and yearweek(b.endDateTime) = yearweek(now())")
 })
-public class Staff implements Member{
+public class Staff{
 
     @Id
     @Column(name = "staff_id")
