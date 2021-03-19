@@ -1,17 +1,23 @@
 package csc1035.project2;
 
+import csc1035.project2.io.ModelsIO;
+import org.hibernate.Session;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "Module")
+@NamedQueries({
+        @NamedQuery(name = "Module_getAll", query = "FROM Module")
+})
 public class Module {
 
     @Id
     @Column(name = "module_id")
     private String moduleId;
 
-    @Column(name = "name")
+    @Column(name = "module_name")
     private String name;
 
     @Column(name = "credits")
@@ -70,6 +76,13 @@ public class Module {
 
     public void setBooking(List<Booking> booking) {
         this.booking = booking;
+    }
+
+    // Query Methods
+    public static List<Module> getAll(Session session) {
+        return session
+                .createNamedQuery("Module_getAll", Module.class)
+                .getResultList();
     }
 }
 
