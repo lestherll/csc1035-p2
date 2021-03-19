@@ -23,6 +23,9 @@ import java.util.List;
 public class Booking {
 
     @Id
+    @Column(name = "booking_id")
+    private String id;
+
     @Column(name = "start")
     private LocalDateTime startDateTime;
 
@@ -63,14 +66,16 @@ public class Booking {
         this.staff = staff;
     }
 
-    public static List<?> getAllBookings(Session session){
-        Query query = session.createNamedQuery("Booking_getAll", Booking.class);
-        return query.getResultList();
+    public static List<Booking> getAll(Session session){
+        return session
+                .createNamedQuery("Booking_getAll", Booking.class)
+                .getResultList();
     }
 
-    public static List<?> getBookingsThisWeek(Session session){
-        Query query = session.createNamedQuery("Booking_thisWeek", Booking.class);
-        return query.getResultList();
+    public static List<Booking> getBookingsThisWeek(Session session){
+        return session
+                .createNamedQuery("Booking_thisWeek", Booking.class)
+                .getResultList();
     }
 
     public LocalDateTime getStartDateTime() {
