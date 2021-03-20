@@ -1,6 +1,5 @@
-package csc1035.project2;
+package csc1035.project2.model;
 
-import csc1035.project2.io.ModelsIO;
 import org.hibernate.Session;
 
 import javax.persistence.*;

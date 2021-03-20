@@ -28,61 +28,83 @@ public class Controller<E> implements IController<E>{
 
     @Override
     public void update(Object s) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.saveOrUpdate(s);
-        session.getTransaction().commit();
-        session.close();
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.saveOrUpdate(s);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public E getById(Class<E> c, int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        E entry = session.get(c, id);
-        session.getTransaction().commit();
-        session.close();
+        E entry = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            entry = session.get(c, id);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return entry;
     }
 
     @Override
     public E getById(Class<E> c, String id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        E entry = session.get(c, id);
-        session.getTransaction().commit();
-        session.close();
+        E entry = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            entry = session.get(c, id);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return entry;
     }
 
     @Override
     public List<E> getAll(Class<E> c) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        List<E> entries = session.createQuery("from "+c.getSimpleName()).list();
-        session.getTransaction().commit();
-        session.close();
+        List<E> entries = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            entries = session.createQuery("from "+c.getSimpleName(), c).list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return entries;
     }
 
     @Override
     public void delete(Class<E> c, int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        E entry = session.get(c, id);
-        session.delete(entry);
-        session.getTransaction().commit();
-        session.close();
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            E entry = session.get(c, id);
+            session.delete(entry);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override
-    public void bulkListSave(List<E> e) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        for (E entry: e){
-            session.save(entry);
+    public void bulkListSave(List<E> entity) {
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            for (E entry: entity){
+                session.save(entry);
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        session.getTransaction().commit();
-        session.close();
+
+
     }
 }

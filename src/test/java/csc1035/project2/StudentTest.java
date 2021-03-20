@@ -1,5 +1,6 @@
 package csc1035.project2;
 
+import csc1035.project2.model.Student;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,9 +16,11 @@ class StudentTest {
 
     @Test
     void getFirstName() {
+        assertEquals("testFirstName", s1.getFirstName());
     }
 
     @Test
     void getLastName() {
+        assertEquals("testLastName", s1.getLastName());
     }
 }

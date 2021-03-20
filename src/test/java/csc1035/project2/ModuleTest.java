@@ -1,5 +1,6 @@
 package csc1035.project2;
 
+import csc1035.project2.model.Module;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
