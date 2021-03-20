@@ -101,4 +101,20 @@ public class UserInterface {
         return input;
     }
 
+    public Student createStudent() {
+        String id, firstName, lastName;
+        id = enterStr("Enter ID");
+        firstName = enterStr("Enter first name");
+        lastName = enterStr("Enter last name");
+        return new Student(id, firstName, lastName);
+    }
+
+    public void addStudent() {
+        this.iController.save(createStudent());
+    }
+
+    public void addStudent(Student student) {
+        this.iController.save(student);
+    }
+
 }
