@@ -3,7 +3,9 @@ package csc1035.project2;
 import org.hibernate.Session;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -27,6 +29,13 @@ public class Staff{
 
     @OneToMany(mappedBy = "staff")
     private List<Booking> booking;
+
+    @ManyToMany
+    @JoinTable(
+            name = "StaffModule",
+            joinColumns = {@JoinColumn(name = "staff_id")},
+            inverseJoinColumns = {@JoinColumn(name = "module_id")})
+    private Set<Module> modules = new HashSet<>();
 
     public Staff() {}
 
@@ -58,6 +67,22 @@ public class Staff{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<Booking> getBooking() {
+        return booking;
+    }
+
+    public void setBooking(List<Booking> booking) {
+        this.booking = booking;
+    }
+
+    public Set<Module> getModules() {
+        return modules;
+    }
+
+    public void setModules(Set<Module> modules) {
+        this.modules = modules;
     }
 
     public List<Booking> getAllBookings(Session session) {
