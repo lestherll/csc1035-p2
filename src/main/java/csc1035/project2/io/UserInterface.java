@@ -117,4 +117,29 @@ public class UserInterface {
         this.iController.save(student);
     }
 
+    public void main() {
+        int choice;
+        System.out.println("Welcome to Booking and Timetable Manager!!!\n");
+        while (true) {
+            choice = enterNum(1, 5, "Enter choice");
+            switch (choice) {
+                case 1 -> {
+                    System.out.println("You selected option 1!");
+                }
+                case 2 -> {
+                    System.out.println("You selected option 2!");
+                }
+                case 3 -> {
+                    System.out.println("You selected option 3!");
+                }
+                case 4 -> {
+                    System.out.println("You selected option 4!");
+                }
+            }
+            if (choice == 5) {
+                System.out.println("BYE!!!");
+                break;
+            }
+        }
+    }
 }
