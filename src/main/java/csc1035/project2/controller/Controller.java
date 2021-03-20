@@ -1,19 +1,29 @@
-package csc1035.project2;
+package csc1035.project2.controller;
 
 import org.hibernate.Session;
-import util.HibernateUtil;
+import org.hibernate.SessionFactory;
 
 import java.util.List;
 
 
 public class Controller<E> implements IController<E>{
+
+    private final SessionFactory sessionFactory;
+
+    public Controller(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public void save(Object o) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(o);
-        session.getTransaction().commit();
-        session.close();
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(o);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

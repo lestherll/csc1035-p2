@@ -1,4 +1,4 @@
-package csc1035.project2;
+package csc1035.project2.controller;
 
 import java.util.List;
 
