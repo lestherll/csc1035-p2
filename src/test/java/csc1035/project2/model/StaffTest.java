@@ -1,4 +1,4 @@
-package csc1035.project2;
+package csc1035.project2.model;
 
 import csc1035.project2.model.Staff;
 import org.junit.jupiter.api.Test;
