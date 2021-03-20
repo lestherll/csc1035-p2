@@ -4,7 +4,9 @@ import csc1035.project2.io.ModelsIO;
 import org.hibernate.Session;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Module")
@@ -28,6 +30,9 @@ public class Module {
 
     @OneToMany(mappedBy = "module")
     private List<Booking> booking;
+
+    @ManyToMany(mappedBy = "modules")
+    private Set<Student> students = new HashSet<>();
 
     public Module() {}
 
@@ -76,6 +81,14 @@ public class Module {
 
     public void setBooking(List<Booking> booking) {
         this.booking = booking;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 
     // Query Methods
