@@ -119,25 +119,62 @@ public class UserInterface {
 
     public void main() {
         int choice;
-        System.out.println("Welcome to Booking and Timetable Manager!!!\n");
+        int choice1;
+        int choice2;
+        System.out.println("Welcome to the Room Booking and Timetable Manager.");
         while (true) {
-            choice = enterNum(1, 5, "Enter choice");
+            choice = enterNum(1, 3, "Would you like to: "
+                                                        + "1. Use the Room Booking System"
+                                                        + "2. Use the Timetabling System"
+                                                        + "3. Exit");
             switch (choice) {
                 case 1 -> {
-                    System.out.println("You selected option 1!");
+                    System.out.println("You selected to use the Room Booking System");
+                    choice1 = enterNum(1,5,"Would you like to: "
+                                                                + "1. Book a room"
+                                                                + "2. Cancel a room booking"
+                                                                + "3. Get a list of available rooms"
+                                                                + "4. Get the timetable of a room"
+                                                                + "5. Update room details");
+                    switch (choice1) {
+                        case 1 -> {
+                            System.out.println("You selected to book a room");
+                        }
+                        case 2 -> {
+                            System.out.println("You selected to cancel a room booking");
+                        }
+                        case 3 -> {
+                            System.out.println("You selected to get a list of available rooms");
+                        }
+                        case 4 -> {
+                            System.out.println("You selected to get the timetable of a room");
+                        }
+                        case 5 -> {
+                            System.out.println("You selected to update room details");
+                        }
+                    }
                 }
                 case 2 -> {
-                    System.out.println("You selected option 2!");
-                }
-                case 3 -> {
-                    System.out.println("You selected option 3!");
-                }
-                case 4 -> {
-                    System.out.println("You selected option 4!");
+                    System.out.println("You selected to use the Timetabling System");
+                    choice2 = enterNum(1,3,"Would you like to: "
+                                                                + "1. Get a student timetable"
+                                                                + "2. Get a staff timetable"
+                                                                + "3. Create a school timetable");
+                    switch (choice2) {
+                        case 1 -> {
+                            System.out.println("You selected to get a student timetable");
+                        }
+                        case 2 -> {
+                            System.out.println("You selected to get a staff timetable");
+                        }
+                        case 3 -> {
+                            System.out.println("You selected to create a school timetable");
+                        }
+                    }
                 }
             }
-            if (choice == 5) {
-                System.out.println("BYE!!!");
+            if (choice == 3) {
+                System.out.println("You selected to exit the system. Goodbye!");
                 break;
             }
         }
