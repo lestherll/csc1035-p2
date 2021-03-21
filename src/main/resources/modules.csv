@@ -1,11 +1,11 @@
-id,name,credits,weeks
-RSI3393,Nunc nisl.,20,12
-BBU5808,Integer pede justo lacinia eget tincidunt eget tempus vel pede.,10,12
-SAM0176,Cras in purus eu magna vulputate luctus.,10,6
-KAZ6935,Morbi quis tortor id nulla ultrices aliquet.,10,12
-TXT1928,Suspendisse ornare consequat lectus.,20,12
-YMG4261,Praesent blandit.,10,3
-NTT2305,Nulla justo.,30,12
-BKR9132,Curabitur at ipsum ac tellus semper interdum.,20,6
-OYI3435,Sed ante.,10,12
-LLX9396,In hac habitasse platea dictumst.,10,12
+id,name,credits,weeks,no_of_lectures,lecture_length,no_of_practicals,practical_length
+RSI3393,Nunc nisl.,20,12,1,2,1,2
+BBU5808,Integer pede justo lacinia eget tincidunt eget tempus vel pede.,10,12,1,2,2,2
+SAM0176,Cras in purus eu magna vulputate luctus.,10,6,3,1,4,1
+KAZ6935,Morbi quis tortor id nulla ultrices aliquet.,10,12,3,1,3,1
+TXT1928,Suspendisse ornare consequat lectus.,20,12,1,1,2,1
+YMG4261,Praesent blandit.,10,3,1,2,1,2
+NTT2305,Nulla justo.,30,12,3,1,2,1
+BKR9132,Curabitur at ipsum ac tellus semper interdum.,20,6,4,2,1,1
+OYI3435,Sed ante.,10,12,4,2,4,1
+LLX9396,In hac habitasse platea dictumst.,10,12,1,1,4,2
