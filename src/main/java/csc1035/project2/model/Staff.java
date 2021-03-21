@@ -9,6 +9,10 @@ import java.util.Set;
 /**
  * This is the Staff class and will be used when a room is booked by a staff member to show who has booked the room.
  * It contains information like Staff_id which will be the primary key and unique identifier, first and last name.
+ * It will also be used to Show which Staff Members teach the modules
+ *
+ * @author
+ * JavaDoc and Comments by Ben Mitchell
  *
  * Named Queries:
  *      "Staff_getAllBookings" - Returns all booking that have been made by a staff member
