@@ -12,7 +12,7 @@ import java.util.Set;
 @IdClass(StudentModule.class)
 
 public class StaffModule implements Serializable {
-    //Create variables, assign them to the columns to the staff_module Table and set Primary key field
+    //Create variables, assign them to the columns to the staff_module Table and set Primary key field.
     @Id
     @Column(name = "module_id")
     private String module_id;
