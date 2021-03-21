@@ -1,12 +1,11 @@
-CSC1035 Project 2 (Team Project)
-================================
+# CSC1035 Project 2 (Team Project)
+Booking-Timetabling System that allows the user book for rooms based on their needs.
 
-You need to fork this project into your team repo. 
+## Dependencies
+Dependencies needed by the project
 
-Details on how to connect with your database can be found on your Canvas group.
+## Usage
+How to use the project
 
-Sample data for the database can be found in `./src/main/resources`. Most of 
-this data was generated using [Mockaroo](https://www.mockaroo.com/). Feel free
-to add more to the csv. This is not an exhaustive list, but you must include
-these columns.
-
+## Architecture
+Architecture of the project
