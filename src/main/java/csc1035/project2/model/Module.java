@@ -37,6 +37,18 @@ public class Module {
     @Column(name = "weeks")
     private int weeks;
 
+    @Column(name = "no_of_lectures")
+    private int noOfLectures;
+
+    @Column(name = "lecture_length")
+    private int lectureLength;
+
+    @Column(name = "no_of_practicals")
+    private int noOfPracticals;
+
+    @Column(name = "practical_length")
+    private int practicalLength;
+
     // Create all the relationships to the other tables in the database
     @OneToMany(mappedBy = "module")
     private List<Booking> booking;
@@ -62,6 +74,17 @@ public class Module {
         this.name = name;
         this.credits = credits;
         this.weeks = weeks;
+    }
+
+    public Module(String moduleId, String name, int credits, int weeks, int noOfLectures, int lectureLength, int noOfPracticals, int practicalLength) {
+        this.moduleId = moduleId;
+        this.name = name;
+        this.credits = credits;
+        this.weeks = weeks;
+        this.noOfLectures = noOfLectures;
+        this.lectureLength = lectureLength;
+        this.noOfPracticals = noOfPracticals;
+        this.practicalLength = practicalLength;
     }
 
     //Create all of the get and setter methods so yuo are able to set and return individual attributes
@@ -97,6 +120,38 @@ public class Module {
         this.weeks = weeks;
     }
 
+    public int getNoOfLectures() {
+        return noOfLectures;
+    }
+
+    public void setNoOfLectures(int noOfLectures) {
+        this.noOfLectures = noOfLectures;
+    }
+
+    public int getLectureLength() {
+        return lectureLength;
+    }
+
+    public void setLectureLength(int lectureLength) {
+        this.lectureLength = lectureLength;
+    }
+
+    public int getNoOfPracticals() {
+        return noOfPracticals;
+    }
+
+    public void setNoOfPracticals(int noOfPracticals) {
+        this.noOfPracticals = noOfPracticals;
+    }
+
+    public int getPracticalLength() {
+        return practicalLength;
+    }
+
+    public void setPracticalLength(int practicalLength) {
+        this.practicalLength = practicalLength;
+    }
+
     public List<Booking> getBooking() {
         return booking;
     }
@@ -119,6 +174,20 @@ public class Module {
 
     public void setStudents(Set<Student> students) {
         this.students = students;
+    }
+
+    @Override
+    public String toString() {
+        return "Module{" +
+                "moduleId='" + moduleId + '\'' +
+                ", name='" + name + '\'' +
+                ", credits=" + credits +
+                ", weeks=" + weeks +
+                ", noOfLectures=" + noOfLectures +
+                ", lectureLength=" + lectureLength +
+                ", noOfPracticals=" + noOfPracticals +
+                ", practicalLength=" + practicalLength +
+                '}';
     }
 
     // Query Methods
