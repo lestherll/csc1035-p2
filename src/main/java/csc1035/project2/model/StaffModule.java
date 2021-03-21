@@ -24,9 +24,9 @@ public class StaffModule implements Serializable {
 
     public StaffModule(){}
 
-    public StaffModule(String module_id, String staff_id) {
-        this.moduleId = module_id;
-        this.staffId = staff_id;
+    public StaffModule(String staffId, String moduleId ) {
+        this.staffId = staffId;
+        this.moduleId = moduleId;
     }
 
     public String getModuleId() {

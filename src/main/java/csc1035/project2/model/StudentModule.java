@@ -24,9 +24,9 @@ public class StudentModule implements Serializable {
 
     public StudentModule() {}
 
-    public StudentModule(String module_id, String student_id) {
-        this.moduleId = module_id;
-        this.studentId = student_id;
+    public StudentModule(String studentId, String moduleId) {
+        this.studentId = studentId;
+        this.moduleId = moduleId;
     }
 
     public String getModuleId() {
