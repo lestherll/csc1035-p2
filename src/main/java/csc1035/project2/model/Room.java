@@ -28,14 +28,14 @@ public class Room {
     @Column(name = "room_id")
     private String roomId;
 
+    @Column(name = "type")
+    private String type;
+
     @Column(name = "max_cap")
     private int maxCapacity;
 
     @Column(name = "sd_max_cap")
     private int sdMaxCapacity;
-
-    @Column(name = "type")
-    private String type;
 
     // Create the relationship to the booking table in the database
     @OneToMany(mappedBy = "room")
@@ -90,6 +90,16 @@ public class Room {
 
     public void setType(String newType) {
         this.type = newType;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomId='" + roomId + '\'' +
+                ", type='" + type + '\'' +
+                ", maxCapacity=" + maxCapacity +
+                ", sdMaxCapacity=" + sdMaxCapacity +
+                '}';
     }
 
     // Query Methods
