@@ -11,31 +11,36 @@ import java.util.Random;
  */
 public class SlotHandlerUtil {
 
-    private int slots = 10;
-    private int interval = 60;
-    private final Random random;
-    private LocalTime startTime = LocalTime.of(8, 0, 0);
-    private LocalTime endTime = LocalTime.of(18, 0, 0);
+    private static int slots = 10;
+    private static int interval = 60;
+    private static final Random random = new Random();
+    private static LocalTime startTime = LocalTime.of(8, 0, 0);
+    private static LocalTime endTime = LocalTime.of(18, 0, 0);
 
 
-    public SlotHandlerUtil(int slots, int interval) {
-        this.slots = slots;
-        this.interval = interval;
-        this.random = new Random();
+    public static List<LocalTime> generateTimesForSlots() {
+        List<LocalTime> ltList = new ArrayList<>();
+        for (int i = 0; i < slots+1; i++) {
+            ltList.add(startTime.plusMinutes(i * interval));
+        }
+
+        LocalTime[] time;
+        for (int i = 1; i < slots+1; i++) {
+            time = slotToTimeRange(ltList, i);
+        }
+        return ltList;
     }
 
-    public SlotHandlerUtil(int slots, int interval, Random random) {
-        this.slots = slots;
-        this.interval = interval;
-        this.random = random;
+    public static Integer[] generateSlotsArr(int n) {
+        Integer[] result = new Integer[n];
+        for (int i = 1; i < n+1; i++) {
+            result[i-1] = i;
+        }
+        return result;
     }
 
-    public SlotHandlerUtil(int slots, int interval, Random random, LocalTime startTime, LocalTime endTime) {
-        this.slots = slots;
-        this.interval = interval;
-        this.random = random;
-        this.startTime = startTime;
-        this.endTime = endTime;
+    public static LocalTime[] slotToTimeRange(List<LocalTime> localTimes, int slotNum) {
+        return new LocalTime[] {localTimes.get(slotNum-1), localTimes.get(slotNum)};
     }
 
 }
