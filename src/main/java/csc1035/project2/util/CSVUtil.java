@@ -1,5 +1,10 @@
 package csc1035.project2.util;
 
+import csc1035.project2.controller.Controller;
+import csc1035.project2.controller.IController;
+import csc1035.project2.model.*;
+import csc1035.project2.model.Module;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -32,4 +37,23 @@ public class CSVUtil {
             System.out.println(list);
         }
     }
+
+    public static List<Room> readRoom() {
+        String path = "src/main/resources/rooms.csv";
+        List<List<String>> res = read(path);
+        res = read(path).subList(1, res.size());
+
+        List<Room> list = new ArrayList<>();
+
+        for (List<String> currList : res) {
+            list.add(new Room(
+                    currList.get(0),
+                    Integer.parseInt(currList.get(2)),
+                    Integer.parseInt(currList.get(3)),
+                    currList.get(1)
+            ));
+        }
+        return list;
+    }
+
 }
