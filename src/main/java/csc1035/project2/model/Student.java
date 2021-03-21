@@ -94,19 +94,25 @@ public class Student {
         this.modules = modules;
     }
 
-    public List<?> getAllBookings(Session session) {
-        Query query = session.createNamedQuery("Student_getAllBookings", Booking.class);
-        return query.setParameter("student", this).getResultList();
+    public List<Booking> getAllBookings(Session session) {
+        return session
+                .createNamedQuery("Student_getAllBookings", Booking.class)
+                .setParameter("student", this)
+                .getResultList();
     }
 
-    public List<?> getActiveBookings(Session session) {
-        Query query = session.createNamedQuery("Student_getActiveBookings", Booking.class);
-        return query.setParameter("student", this).getResultList();
+    public List<Booking> getActiveBookings(Session session) {
+        return session
+                .createNamedQuery("Student_getActiveBookings", Booking.class)
+                .setParameter("student", this)
+                .getResultList();
     }
 
-    public List<?> getBookingsThisWeek(Session session) {
-        Query query = session.createNamedQuery("Student_getBookingsThisWeek", Booking.class);
-        return query.setParameter("student", this).getResultList();
+    public List<Booking> getBookingsThisWeek(Session session) {
+        return session
+                .createNamedQuery("Student_getBookingsThisWeek", Booking.class)
+                .setParameter("student", this)
+                .getResultList();
     }
 
     @Override
