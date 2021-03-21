@@ -1,6 +1,6 @@
-package util;
+package csc1035.project2.util;
 
-import csc1035.project2.model.Student;
+import csc1035.project2.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
