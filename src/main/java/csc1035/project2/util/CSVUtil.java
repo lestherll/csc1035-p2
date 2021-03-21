@@ -82,4 +82,27 @@ public class CSVUtil {
         return list;
     }
 
+    public static List<Module> readModule() {
+        String path = "src/main/resources/modules.csv";
+        List<List<String>> res = read(path);
+        res = read(path).subList(1, res.size());
+
+        List<Module> list = new ArrayList<>();
+
+        for (List<String> currList : res) {
+            list.add(new Module(
+                    currList.get(0),
+                    currList.get(1),
+                    Integer.parseInt(currList.get(2)),
+                    Integer.parseInt(currList.get(3)),
+                    Integer.parseInt(currList.get(4)),
+                    Integer.parseInt(currList.get(5)),
+                    Integer.parseInt(currList.get(6)),
+                    Integer.parseInt(currList.get(7))
+                    )
+            );
+        }
+        return list;
+    }
+
 }
