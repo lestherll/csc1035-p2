@@ -10,40 +10,39 @@ import java.util.Set;
 @Table(name = "StudentModule")
 @IdClass(StudentModule.class)
 @NamedQueries({
-        @NamedQuery(name = "staffModule_getAll", query = "FROM StaffModule"),
+        @NamedQuery(name = "StaffModule_getAll", query = "FROM StaffModule"),
 })
-
 public class StaffModule implements Serializable {
     //Create variables, assign them to the columns to the staff_module Table and set Primary key field.
     @Id
     @Column(name = "module_id")
-    private String module_id;
+    private String moduleId;
 
     @Id
     @Column(name = "staff_id")
-    private String staff_id;
+    private String staffId;
 
     public StaffModule(){}
 
     public StaffModule(String module_id, String staff_id) {
-        this.module_id = module_id;
-        this.staff_id = staff_id;
+        this.moduleId = module_id;
+        this.staffId = staff_id;
     }
 
-    public String getModule_id() {
-        return module_id;
+    public String getModuleId() {
+        return moduleId;
     }
 
-    public String getStaff_id() {
-        return staff_id;
+    public void setModuleId(String moduleId) {
+        this.moduleId = moduleId;
     }
 
-    public void setModule_id(String module_id) {
-        this.module_id = module_id;
+    public String getStaffId() {
+        return staffId;
     }
 
-    public void setStaff_id(String staff_id) {
-        this.staff_id = staff_id;
+    public void setStaffId(String staffId) {
+        this.staffId = staffId;
     }
 
     /**
@@ -53,13 +52,27 @@ public class StaffModule implements Serializable {
     @Override
     public String toString() {
         return "StaffModule{" +
-                "module_id='" + module_id + '\'' +
-                ", staff_id='" + staff_id + '\'' +
+                "module_id='" + moduleId + '\'' +
+                ", staff_id='" + staffId + '\'' +
                 '}';
     }
-        public List<StaffModule> getBookingsThisWeek(Session session) {
-            return session
-                    .createNamedQuery("staffModule_getAll", StaffModule.class)
-                    .getResultList();
-        }
+
+    @Override
+    public int hashCode() {
+        return (int)(this.staffId + this.moduleId).hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (!(obj instanceof StudentModule)) return false;
+        StaffModule pk = (StaffModule) obj;
+        return pk.staffId.equals(this.staffId) && pk.moduleId.equals(this.moduleId);
+    }
+
+    public List<StaffModule> getAll(Session session) {
+        return session
+                .createNamedQuery("staffModule_getAll", StaffModule.class)
+                .getResultList();
+    }
 }
