@@ -13,10 +13,20 @@ public class SlotHandlerUtil {
 
     private static int slots = 10;
     private static int interval = 60;
-    private static final Random random = new Random();
     private static LocalTime startTime = LocalTime.of(8, 0, 0);
     private static LocalTime endTime = LocalTime.of(18, 0, 0);
 
+    private static final Random random = new Random();
+
+    private static void setTimeRange(LocalTime newStartTime, LocalTime newEndTime) {
+        startTime = newStartTime;
+        endTime = newEndTime;
+    }
+
+    private static void setSlotInterval(int newSlotNum, int newInterval) {
+        slots = newSlotNum;
+        interval = newInterval;
+    }
 
     public static List<LocalTime> generateTimesForSlots() {
         List<LocalTime> ltList = new ArrayList<>();
