@@ -18,8 +18,8 @@ import java.util.Set;
  *
  */
 @Entity
-@Table(name = "StudentModule")
-@IdClass(StudentModule.class)
+@Table(name = "StaffModule")
+@IdClass(StaffModule.class)
 @NamedQueries({
         @NamedQuery(name = "StaffModule_getAll", query = "FROM StaffModule"),
 })
