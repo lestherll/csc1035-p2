@@ -62,5 +62,4 @@ public class StaffModule implements Serializable {
                     .createNamedQuery("staffModule_getAll", StaffModule.class)
                     .getResultList();
         }
-    
 }
