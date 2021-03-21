@@ -105,4 +105,32 @@ public class CSVUtil {
         return list;
     }
 
+    public static List<StaffModule> readStaffModule() {
+        String path = "src/main/resources/staff_module.csv";
+        List<List<String>> res = read(path);
+        res = read(path).subList(1, res.size());
+
+        List<StaffModule> list = new ArrayList<>();
+
+        for (List<String> currList : res) {
+            StaffModule currSM = new StaffModule(currList.get(1), currList.get(0));
+            list.add(currSM);
+        }
+
+        return list;
+    }
+
+    public static List<StudentModule> readStudentModule() {
+        String path = "src/main/resources/student_module.csv";
+        List<List<String>> res = read(path);
+        res = read(path).subList(1, res.size());
+
+        List<StudentModule> list = new ArrayList<>();
+        for (List<String> currList : res) {
+            StudentModule currSM = new StudentModule(currList.get(1), currList.get(0));
+            list.add(currSM);
+        }
+        return list;
+    }
+
 }
