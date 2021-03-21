@@ -6,6 +6,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class is used to allow queries to the StaffModule table and so that entries can be added directly to the table.
+ * It contains Module id and Staff ID
+ *
+ * @author Ben Mitchell
+ * JavaDoc and Comments by Ben Mitchell
+ *
+ * Named Queries:
+ *      "StaffModule_getAll" - Returns all records in the StaffModule table
+ *
+ */
 @Entity
 @Table(name = "StudentModule")
 @IdClass(StudentModule.class)
@@ -24,11 +35,16 @@ public class StaffModule implements Serializable {
 
     public StaffModule(){}
 
-    public StaffModule(String staffId, String moduleId ) {
-        this.staffId = staffId;
-        this.moduleId = moduleId;
+    /**
+     * @param module_id This will be the identifier for the Module
+     * @param staff_id This will be the identifier for the Staff member
+     */
+    public StaffModule(String module_id, String staff_id) {
+        this.moduleId = module_id;
+        this.staffId = staff_id;
     }
 
+    //Create all of the get and setter methods so yuo are able to set and return individual attributes
     public String getModuleId() {
         return moduleId;
     }
@@ -46,7 +62,6 @@ public class StaffModule implements Serializable {
     }
 
     /**
-     *
      * @return Returns human readable print of the StaffModule Class
      */
     @Override
@@ -57,11 +72,19 @@ public class StaffModule implements Serializable {
                 '}';
     }
 
+    /**
+     * @return returns the hash integer of staffId + moduleId
+     */
     @Override
     public int hashCode() {
         return (int)(this.staffId + this.moduleId).hashCode();
     }
 
+    /**
+     *
+     * @param obj object parameter representing StaffModule
+     * @return Returns pk.studentId to this.staffId & pk.moduleId to this.moduleId
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
@@ -70,6 +93,11 @@ public class StaffModule implements Serializable {
         return pk.staffId.equals(this.staffId) && pk.moduleId.equals(this.moduleId);
     }
 
+    /**
+     *
+     * @param session Creates DataBase session
+     * @return Returns all records in the StaffModule table
+     */
     public List<StaffModule> getAll(Session session) {
         return session
                 .createNamedQuery("staffModule_getAll", StaffModule.class)
