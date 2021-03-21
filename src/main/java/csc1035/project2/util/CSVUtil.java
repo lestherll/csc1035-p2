@@ -56,4 +56,17 @@ public class CSVUtil {
         return list;
     }
 
+    public static List<Staff> readStaff() {
+        String path = "src/main/resources/staff.csv";
+        List<List<String>> res = read(path);
+        res = read(path).subList(1, res.size());
+
+        List<Staff> list = new ArrayList<>();
+
+        for (List<String> currList : res) {
+            list.add(new Staff(currList.get(0), currList.get(1), currList.get(2)));
+        }
+        return list;
+    }
+
 }
