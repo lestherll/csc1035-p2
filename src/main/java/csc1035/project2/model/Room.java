@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = "Room")
 @NamedQueries({
         @NamedQuery(name = "Room_getAll", query = "FROM Room"),
-        @NamedQuery(name = "Room_getActiveBookings", query = "FROM Booking b WHERE b.room = :room")
+        @NamedQuery(name = "Room_getActiveBookings", query = "FROM Booking b WHERE b.room = :room and yearweek(b.endDateTime) = yearweek(now())")
 })
 public class Room {
     //Create variables, assign them to the columns in the Room Table and set Primary key field
