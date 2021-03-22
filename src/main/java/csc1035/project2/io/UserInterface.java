@@ -265,9 +265,22 @@ public class UserInterface {
                             room = getRoomById();
                             session = sessionFactory.openSession();
                             List<Booking> bookings = room.getActiveBookings(session);
+
+                            Object booker;
                             if (bookings.size() != 0) {
                                 for(Booking b: bookings) {
-                                    System.out.println(b);
+
+                                    if (b.getStudent() == null) {
+                                        booker = b.getStaff();
+                                    } else {
+                                        booker = b.getStudent();
+                                    }
+
+                                    System.out.println("\nRoom: " + b.getRoom() +
+                                            "\nStart: " + b.getStartDateTime() +
+                                            "\nEnd: " + b.getEndDateTime() +
+                                            "\nBooker: " + booker + "\n"
+                                    );
                                 }
                             } else {
                                 System.out.println("There are no active bookings for this room");
