@@ -26,6 +26,24 @@ public class CSVUtil {
         return result;
     }
 
+    public static void saveOrUpdateFromCSV(IController ic) {
+        ic.bulkListUpdate(readRoom());
+        ic.bulkListUpdate(readModule());
+        ic.bulkListUpdate(readStaff());
+        ic.bulkListUpdate(readStudent());
+        ic.bulkListUpdate(readStaffModule());
+        ic.bulkListUpdate(readStudentModule());
+    }
+
+    public static void saveFromCSV(IController ic) {
+        ic.bulkListSave(readRoom());
+        ic.bulkListSave(readModule());
+        ic.bulkListSave(readStaff());
+        ic.bulkListSave(readStudent());
+        ic.bulkListSave(readStaffModule());
+        ic.bulkListSave(readStudentModule());
+    }
+
     public static <E> void printList(Class<E> c, List<E> data) {
         for (E e: data) {
             System.out.println(e);
