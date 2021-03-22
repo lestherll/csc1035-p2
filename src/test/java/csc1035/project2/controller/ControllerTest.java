@@ -62,13 +62,13 @@ class ControllerTest {
         Student student = new Student();
         student.setStudentId("testID1");
         ic.save(student);
-        student.setStudentId("testID2");
+        student.setFirstName("testFistName");
         ic.update(student);
 
 
-        Student fetched = ic.getById(Student.class, "testID2");
-        ic.delete(Student.class, "testID2");
-        assertEquals(fetched.getStudentId(), student.getStudentId());
+        Student fetched = ic.getById(Student.class, "testID1");
+        ic.delete(Student.class, "testID1");
+        assertEquals(fetched.getFirstName(), student.getFirstName());
     }
 
 }
