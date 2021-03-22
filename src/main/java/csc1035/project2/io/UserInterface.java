@@ -134,20 +134,21 @@ public class UserInterface {
         int choice;
         int choice1;
         int choice2;
-        System.out.println("Welcome to the Room Booking and Timetable Manager. Would you like to: \n"
-                                                                        + "1. Use the Room Booking System \n"
-                                                                        + "2. Use the Timetabling System \n"
-                                                                        + "3. Exit \n");
+        System.out.println("Welcome!!!");
         while (true) {
+            System.out.println("Room Booking and Timetable Manager. Would you like to: \n"
+                    + "1. Use the Room Booking System \n"
+                    + "2. Use the Timetabling System \n"
+                    + "3. Exit \n");
             choice = enterNum(1, 3, "Please enter your choice");
             switch (choice) {
                 case 1 -> {
                     System.out.println("You selected to use the Room Booking System. Would you like to: \n"
-                                                                                            + "1. Book a room \n"
-                                                                                            + "2. Cancel a room booking \n"
-                                                                                            + "3. Get a list of available rooms \n"
-                                                                                            + "4. Get the timetable of a room \n"
-                                                                                            + "5. Update room details \n");
+                            + "1. Book a room \n"
+                            + "2. Cancel a room booking \n"
+                            + "3. Get a list of available rooms \n"
+                            + "4. Get the timetable of a room \n"
+                            + "5. Update room details \n");
                     choice1 = enterNum(1,5,"Please enter your choice");
                     switch (choice1) {
                         case 1 -> {
@@ -169,9 +170,9 @@ public class UserInterface {
                 }
                 case 2 -> {
                     System.out.println("You selected to use the Timetabling System. Would you like to: \n"
-                                                                                            + "1. Get a student timetable \n"
-                                                                                            + "2. Get a staff timetable \n"
-                                                                                            + "3. Create a school timetable \n");
+                            + "1. Get a student timetable \n"
+                            + "2. Get a staff timetable \n"
+                            + "3. Create a school timetable \n");
                     choice2 = enterNum(1,3,"Please enter your choice");
                     switch (choice2) {
                         case 1 -> {
