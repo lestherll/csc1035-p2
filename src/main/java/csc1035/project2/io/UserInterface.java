@@ -252,6 +252,13 @@ public class UserInterface {
                         }
                         case 3 -> {
                             System.out.println("You selected to get a list of available rooms");
+                            List<Room> rooms = iController.getAll(Room.class);
+                            for (Room r: rooms) {
+                                System.out.println("\nid: " + r.getRoomId()
+                                        + "\ntype: " + r.getType()
+                                        + "\nmax cap: " + r.getMaxCap()
+                                        + "\nSD max cap: " +r.getSdMaxCap() + "\n");
+                            }
                         }
                         case 4 -> {
                             System.out.println("You selected to get the timetable of a room");
