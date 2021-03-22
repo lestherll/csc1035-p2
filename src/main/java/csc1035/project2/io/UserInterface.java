@@ -1,7 +1,11 @@
 package csc1035.project2.io;
 
+import csc1035.project2.controller.Controller;
 import csc1035.project2.model.Student;
 import csc1035.project2.controller.IController;
+import csc1035.project2.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -10,10 +14,18 @@ public class UserInterface {
 
     private final Scanner scanner;
     private final IController iController;
+    private final SessionFactory sessionFactory;
 
-    public UserInterface(Scanner scanner, IController iController) {
+    public UserInterface() {
+        this.sessionFactory = HibernateUtil.getSessionFactory();
+        this.scanner = new Scanner(System.in);
+        this.iController = new Controller(sessionFactory);
+    }
+
+    public UserInterface(Scanner scanner, IController iController, SessionFactory sessionFactory) {
         this.scanner = scanner;
         this.iController = iController;
+        this.sessionFactory = sessionFactory;
     }
 
     /**
@@ -118,6 +130,7 @@ public class UserInterface {
     }
 
     public void main() {
+        Session s;
         int choice;
         int choice1;
         int choice2;
@@ -162,7 +175,6 @@ public class UserInterface {
                                                                 + "3. Create a school timetable");
                     switch (choice2) {
                         case 1 -> {
-                            System.out.println("You selected to get a student timetable");
                         }
                         case 2 -> {
                             System.out.println("You selected to get a staff timetable");
