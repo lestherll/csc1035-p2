@@ -18,26 +18,36 @@ public class SlotHandlerUtil {
 
     private static final Random random = new Random();
 
+    /**
+     * Set a new time range
+     * @param newStartTime the starting time
+     * @param newEndTime the ending time
+     */
     private static void setTimeRange(LocalTime newStartTime, LocalTime newEndTime) {
         startTime = newStartTime;
         endTime = newEndTime;
     }
 
+    /**
+     * Set new number of slot and intervals
+     * @param newSlotNum the new slot number
+     * @param newInterval the new interval(in minutes)
+     */
     private static void setSlotInterval(int newSlotNum, int newInterval) {
         slots = newSlotNum;
         interval = newInterval;
     }
 
+    /**
+     * Create time points based on the number of slots and the interval set
+     * @return a list of LocalTime object
+     */
     public static List<LocalTime> generateTimesForSlots() {
         List<LocalTime> ltList = new ArrayList<>();
         for (int i = 0; i < slots+1; i++) {
             ltList.add(startTime.plusMinutes(i * interval));
         }
 
-//        LocalTime[] time;
-//        for (int i = 1; i < slots+1; i++) {
-//            time = slotToTimeRange(ltList, i);
-//        }
         return ltList;
     }
 
@@ -49,6 +59,12 @@ public class SlotHandlerUtil {
         return result;
     }
 
+    /**
+     * Gives a time range based on the slotNum given
+     * @param slotNum the slot needed for the range
+     * @return LocalTime array of length 2 where the elements
+     * are the starting and ending time respectively
+     */
     public static LocalTime[] slotToTimeRange(int slotNum) {
         List<LocalTime> localTimes = generateTimesForSlots();
         return new LocalTime[] {localTimes.get(slotNum-1), localTimes.get(slotNum)};
