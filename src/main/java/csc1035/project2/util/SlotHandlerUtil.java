@@ -34,10 +34,10 @@ public class SlotHandlerUtil {
             ltList.add(startTime.plusMinutes(i * interval));
         }
 
-        LocalTime[] time;
-        for (int i = 1; i < slots+1; i++) {
-            time = slotToTimeRange(ltList, i);
-        }
+//        LocalTime[] time;
+//        for (int i = 1; i < slots+1; i++) {
+//            time = slotToTimeRange(ltList, i);
+//        }
         return ltList;
     }
 
@@ -49,7 +49,8 @@ public class SlotHandlerUtil {
         return result;
     }
 
-    public static LocalTime[] slotToTimeRange(List<LocalTime> localTimes, int slotNum) {
+    public static LocalTime[] slotToTimeRange(int slotNum) {
+        List<LocalTime> localTimes = generateTimesForSlots();
         return new LocalTime[] {localTimes.get(slotNum-1), localTimes.get(slotNum)};
     }
 
