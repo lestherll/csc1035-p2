@@ -1,14 +1,25 @@
 package csc1035.project2.io;
 
 import csc1035.project2.controller.Controller;
+import csc1035.project2.model.Booking;
+import csc1035.project2.model.Room;
+import csc1035.project2.model.Staff;
 import csc1035.project2.model.Student;
+import csc1035.project2.model.Module;
 import csc1035.project2.controller.IController;
 import csc1035.project2.util.HibernateUtil;
+import csc1035.project2.util.SlotHandlerUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
+
 
 public class UserInterface {
 
@@ -129,8 +140,72 @@ public class UserInterface {
         this.iController.save(student);
     }
 
+    // Case 1 Methods
+    public LocalTime[] getTimeBySlot() {
+        int slot = enterNum(1, 20, "Enter time slot [1-10]");
+        return SlotHandlerUtil.slotToTimeRange(slot);
+    }
+
+    public LocalDate getBookingDate() {
+        Calendar calendar= Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = enterNum(calendar.get(Calendar.MONTH)+1, 12, "Enter month");
+        int day = enterNum(calendar.get(Calendar.DATE), calendar.getActualMaximum(Calendar.DATE), "Enter day");
+        return LocalDate.of(year, month, day);
+    }
+
+    public Room getRoomById() {
+        String roomId = enterStr("Enter room id");
+        return (Room) iController.getById(Room.class, roomId);
+    }
+
+    public Staff getStaffById() {
+        String staffId = enterStr("Enter staff id");
+        return (Staff) iController.getById(Staff.class, staffId);
+    }
+
+    public Student getStudentById() {
+        String studId = enterStr("Enter student id");
+        return (Student) iController.getById(Student.class, studId);
+    }
+
+    public Module getModuleById() {
+        String moduleId = enterStr("Enter module id");
+        return (Module) iController.getById(Module.class, moduleId);
+    }
+
+    public LocalDateTime mergeDateTime(LocalDate date, LocalTime time) {
+        return LocalDateTime.of(date, time);
+    }
+
+    public Booking createBooking(int choice) {
+        LocalTime[] lt = getTimeBySlot();
+        LocalDate ld = getBookingDate();
+        Room room = getRoomById();
+        Module module = getModuleById();
+        LocalDateTime start = mergeDateTime(ld, lt[0]);
+        LocalDateTime end = mergeDateTime(ld, lt[1]);
+
+        Booking booking = new Booking();
+
+        if (choice == 1) {
+            Staff staff = getStaffById();
+            booking = new Booking(start, end, module, room, staff);
+        } else if (choice == 2) {
+            Student student = getStudentById();
+            booking = new Booking(start, end, module, room, student );
+        }
+        return booking;
+    }
+
     public void main() {
-        Session s;
+        // Declare model variables
+        Session session;
+        Staff staff;
+        Student student;
+        Room room;
+        Booking booking;
+
         int choice;
         int choice1;
         int choice2;
@@ -152,16 +227,35 @@ public class UserInterface {
                     choice1 = enterNum(1,5,"Please enter your choice");
                     switch (choice1) {
                         case 1 -> {
-                            System.out.println("You selected to book a room");
+                            System.out.println("Room Booking:\n" +
+                                    "1. Staff\n" +
+                                    "2. Student\n" +
+                                    "3. Quit room booking\n");
+                            choice2 = enterNum(1,3, "Enter choice");
+                            try {
+                                booking = createBooking(choice2);
+                                iController.save(booking);
+                                System.out.println("Successfully booked" + booking);
+                            } catch (Exception e) {
+                                System.out.println("Failed to book");
+                            }
+
                         }
                         case 2 -> {
                             System.out.println("You selected to cancel a room booking");
+                            int bookingId = enterNum(1, 999999,"Enter booking id");
+                            iController.delete(Booking.class, bookingId);
                         }
                         case 3 -> {
                             System.out.println("You selected to get a list of available rooms");
                         }
                         case 4 -> {
                             System.out.println("You selected to get the timetable of a room");
+                            room = getRoomById();
+                            session = sessionFactory.openSession();
+                            for(Booking b: room.getActiveBookings(session)) {
+                                System.out.println(b);
+                            }
                         }
                         case 5 -> {
                             System.out.println("You selected to update room details");
