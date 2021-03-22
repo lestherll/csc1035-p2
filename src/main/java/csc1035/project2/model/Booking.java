@@ -110,6 +110,10 @@ public class Booking {
                 .getResultList();
     }
 
+    public int getId() {
+        return this.id;
+    }
+
     /**
      * @return Returns start date time for booking object
      */
