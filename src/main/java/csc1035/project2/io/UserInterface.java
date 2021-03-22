@@ -142,7 +142,7 @@ public class UserInterface {
 
     // Case 1 Methods
     public LocalTime[] getTimeBySlot() {
-        int slot = enterNum(1, 20, "Enter time slot [1-10]");
+        int slot = enterNum(1, 20, "Enter time slot [1-10](1hr/slot from 8am)");
         return SlotHandlerUtil.slotToTimeRange(slot);
     }
 
@@ -232,10 +232,14 @@ public class UserInterface {
                                     "2. Student\n" +
                                     "3. Quit room booking\n");
                             choice2 = enterNum(1,3, "Enter choice");
+                            booking = createBooking(choice2);
+                            iController.save(booking);
+
+                            Booking test = (Booking) iController.getById(Booking.class, booking.getId());
                             try {
-                                booking = createBooking(choice2);
-                                iController.save(booking);
-                                System.out.println("Successfully booked" + booking);
+                                if (test.getId() == booking.getId()) {
+                                    System.out.println("Successfully booked");
+                                }
                             } catch (Exception e) {
                                 System.out.println("Failed to book");
                             }
@@ -253,9 +257,15 @@ public class UserInterface {
                             System.out.println("You selected to get the timetable of a room");
                             room = getRoomById();
                             session = sessionFactory.openSession();
-                            for(Booking b: room.getActiveBookings(session)) {
-                                System.out.println(b);
+                            List<Booking> bookings = room.getActiveBookings(session);
+                            if (bookings.size() != 0) {
+                                for(Booking b: bookings) {
+                                    System.out.println(b);
+                                }
+                            } else {
+                                System.out.println("There are no active bookings for this room");
                             }
+
                         }
                         case 5 -> {
                             System.out.println("You selected to update room details");
