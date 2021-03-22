@@ -269,6 +269,11 @@ public class UserInterface {
                         }
                         case 5 -> {
                             System.out.println("You selected to update room details");
+                            room = getRoomById();
+                            room.setType(enterStr("Enter new type"));
+                            room.setMaxCap(enterNum(1, 999, "Enter max cap"));
+                            room.setSdMaxCap(enterNum(1, 999, "Enter Social Dis Cap"));
+                            iController.update(room);
                         }
                     }
                 }
