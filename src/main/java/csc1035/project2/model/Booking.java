@@ -27,7 +27,7 @@ public class Booking {
     // Mapping varaibles to columns and setting the primary key field
     @Id
     @Column(name = "booking_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @Column(name = "start")
