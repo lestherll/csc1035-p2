@@ -7,7 +7,8 @@ run the source code and the unit tests.
 
 ## Usage
 The project is simple to start. [Main.java](src/main/java/Main.java) must be ran using 
-the appropriate JDK version.
+the appropriate JDK version. The main class relies on the main method of the UserInterface
+class. The UI class dictates how the user can interact with the system.
 
 ## Architecture
 The architecture of the project tries to follow the Model-View-Controller architecture 
@@ -43,3 +44,7 @@ project. The most import Helper Class is the HibernateUtil. This allows the prog
 create SessionFactory objects and in turn create sessions and begin transactions. These
 are crucial because it is what enables us to communicate with the database, schema, and
 tables.
+
+#### NOTES
+  - Merged module_requirements to modules.csv because the fields in requirements directly
+depend on the module.
