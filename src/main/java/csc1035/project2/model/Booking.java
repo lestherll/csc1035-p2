@@ -28,7 +28,7 @@ public class Booking {
     @Id
     @Column(name = "booking_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
 
     @Column(name = "start")
     private LocalDateTime startDateTime;
@@ -61,9 +61,10 @@ public class Booking {
      * @param endDateTime This will be the time the booking ends
      * @param room This is the room that will bbe booked for the duration
      */
-    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime, Room room) {
+    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime, Module module, Room room) {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        this.module = module;
         this.room = room;
     }
 
@@ -74,8 +75,8 @@ public class Booking {
      * @param room room This is the room that will bbe booked for the duration
      * @param student This will be the student that booked the room
      */
-    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime, Room room, Student student) {
-        this(startDateTime, endDateTime, room);
+    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime, Module module, Room room, Student student) {
+        this(startDateTime, endDateTime,module, room);
         this.student = student;
     }
 
@@ -86,8 +87,8 @@ public class Booking {
      * @param room This is the room that will bbe booked for the duration
      * @param staff This will be the Staff member that booked the room
      */
-    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime, Room room, Staff staff) {
-        this(startDateTime, endDateTime, room);
+    public Booking(LocalDateTime startDateTime, LocalDateTime endDateTime, Module module, Room room, Staff staff) {
+        this(startDateTime, endDateTime, module, room);
         this.staff = staff;
     }
 
@@ -199,9 +200,12 @@ public class Booking {
     @Override
     public String toString() {
         return "Booking{" +
-                "startDateTime=" + startDateTime +
+                "id='" + id + '\'' +
+                ", startDateTime=" + startDateTime +
                 ", endDateTime=" + endDateTime +
                 ", student=" + student +
+                ", staff=" + staff +
+                ", module=" + module +
                 ", room=" + room +
                 '}';
     }
