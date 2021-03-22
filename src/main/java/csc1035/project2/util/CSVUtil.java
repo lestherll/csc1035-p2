@@ -26,15 +26,6 @@ public class CSVUtil {
         return result;
     }
 
-    public static void generateFromCSV(IController ic) {
-        ic.bulkListUpdate(readRoom());
-        ic.bulkListUpdate(readModule());
-        ic.bulkListUpdate(readStaff());
-        ic.bulkListUpdate(readStudent());
-        ic.bulkListUpdate(readStaffModule());
-        ic.bulkListUpdate(readStudentModule());
-    }
-
     public static <E> void printList(Class<E> c, List<E> data) {
         for (E e: data) {
             System.out.println(e);
