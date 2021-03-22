@@ -21,18 +21,38 @@ import java.util.List;
 import java.util.Scanner;
 
 
+/**
+ * UserInterface contains the main program loop for the command line program.
+ * This also houses everything that the user will use to interact with the
+ * database tables.
+ */
 public class UserInterface {
 
     private final Scanner scanner;
     private final IController iController;
     private final SessionFactory sessionFactory;
 
+
+    /**
+     * If no argument is passed, the object will create the
+     * dependencies by default
+     */
     public UserInterface() {
         this.sessionFactory = HibernateUtil.getSessionFactory();
         this.scanner = new Scanner(System.in);
         this.iController = new Controller(sessionFactory);
     }
 
+    /**
+     * Arguments can be passed so that there is better support
+     * for objects higher in the dependency hierarchy
+     * @param scanner will be used for taking inputs
+     * @param iController is the CRUD object that will
+     *                    create, read, update, delete
+     *                    records
+     * @param sessionFactory the factory pattern that will
+     *                       be used for creating sessions
+     */
     public UserInterface(Scanner scanner, IController iController, SessionFactory sessionFactory) {
         this.scanner = scanner;
         this.iController = iController;
@@ -124,6 +144,10 @@ public class UserInterface {
         return input;
     }
 
+
+    /**
+     * @return student object created from the inputs
+     */
     public Student createStudent() {
         String id, firstName, lastName;
         id = enterStr("Enter ID");
@@ -140,12 +164,22 @@ public class UserInterface {
         this.iController.save(student);
     }
 
+    /**
+     * The user will book based on slots. Slots are equal distribution
+     * of time intervals between the opening and closing times defined
+     * in SlotHandlerUtil class.
+     * @return LocalTime[] object with length 2 to be used for start
+     * and end time of a booking
+     */
     // Case 1 Methods
     public LocalTime[] getTimeBySlot() {
         int slot = enterNum(1, 20, "Enter time slot [1-10](1hr/slot from 8am)");
         return SlotHandlerUtil.slotToTimeRange(slot);
     }
 
+    /**
+     * @return a LocalDate object created from the inputs of the user
+     */
     public LocalDate getBookingDate() {
         Calendar calendar= Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -154,30 +188,55 @@ public class UserInterface {
         return LocalDate.of(year, month, day);
     }
 
+    /**
+     * @return a Room object that is fetched using its ID
+     */
     public Room getRoomById() {
         String roomId = enterStr("Enter room id");
         return (Room) iController.getById(Room.class, roomId);
     }
 
+    /**
+     * @return a Staff object that is fetched using its ID
+     */
     public Staff getStaffById() {
         String staffId = enterStr("Enter staff id");
         return (Staff) iController.getById(Staff.class, staffId);
     }
 
+    /**
+     * @return a Student object that is fetched using its ID
+     */
     public Student getStudentById() {
         String studId = enterStr("Enter student id");
         return (Student) iController.getById(Student.class, studId);
     }
 
+    /**
+     * @return a Module object that is fetched using its ID
+     */
     public Module getModuleById() {
         String moduleId = enterStr("Enter module id");
         return (Module) iController.getById(Module.class, moduleId);
     }
 
+
+    /**
+     * The method merges a LocalDate and LocalTime object
+     * @param date
+     * @param time
+     * @return a LocalDateTime merged object from the arguments.
+     */
     public LocalDateTime mergeDateTime(LocalDate date, LocalTime time) {
         return LocalDateTime.of(date, time);
     }
 
+
+    /**
+     * Choice decides whether a booking was made by staff or a student
+     * @param choice passed from the main menu game loop
+     * @return a Booking object
+     */
     public Booking createBooking(int choice) {
         LocalTime[] lt = getTimeBySlot();
         LocalDate ld = getBookingDate();
@@ -198,6 +257,16 @@ public class UserInterface {
         return booking;
     }
 
+    /**
+     * The main program branching-based loop that is
+     * directly based on the clients requirements.
+     * The user will select at the start what system
+     * they want to interact with. RBS deals with bookings
+     * and rooms. TBS deals with timetables for the school,
+     * staff, and students.
+     *
+     * The program will only exit if the user chose to.
+     */
     public void main() {
         // Declare model variables
         Session session;
@@ -305,6 +374,7 @@ public class UserInterface {
                     choice2 = enterNum(1,3,"Please enter your choice");
                     switch (choice2) {
                         case 1 -> {
+                            System.out.println("You selected to produce a timetable for a student");
                         }
                         case 2 -> {
                             System.out.println("You selected to get a staff timetable");
