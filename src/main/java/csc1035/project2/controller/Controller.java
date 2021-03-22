@@ -39,6 +39,20 @@ public class Controller<E> implements IController<E>{
     }
 
     @Override
+    public void bulkListUpdate(List<E> entityList) {
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            for (E e: entityList) {
+                session.saveOrUpdate(e);
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
     public E getById(Class<E> c, int id) {
         E entry = null;
         try (Session session = this.sessionFactory.openSession()) {
@@ -91,6 +105,18 @@ public class Controller<E> implements IController<E>{
         }
 
 
+    }
+
+    @Override
+    public void delete(Class<E> c, String id) {
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            E entry = session.get(c, id);
+            session.delete(entry);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
