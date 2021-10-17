@@ -7,7 +7,7 @@ run the source code and the unit tests.
 
 ## Usage
 The project is simple to start. [Main.java](src/main/java/Main.java) must be ran using 
-the appropriate JDK version. The main class relies on the main method of the UserInterface
+the appropriate JDK version (JDK 8+). The main class relies on the main method of the UserInterface
 class. The UI class dictates how the user can interact with the system.
 
 ## Architecture
@@ -40,7 +40,7 @@ and delete records or objects at will.
 
 ### [Util](src/main/java/csc1035/project2/util)
 These are the classes that contain the helper methods that can be used throughout the
-project. The most import Helper Class is the HibernateUtil. This allows the program to
+project. The most important Helper class is the HibernateUtil. This allows the program to
 create SessionFactory objects and in turn create sessions and begin transactions. These
 are crucial because it is what enables us to communicate with the database, schema, and
 tables.
